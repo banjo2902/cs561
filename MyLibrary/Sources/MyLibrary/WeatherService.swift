@@ -24,10 +24,20 @@ class WeatherServiceImpl: WeatherService {
     }
 }
 
-private struct Weather: Decodable {
+struct Weather: Decodable {
     let main: Main
 
     struct Main: Decodable {
         let temp: Double
     }
 }
+
+/*
+#if DEBUG
+extension Test {
+    public func exposePrivate() -> Int {
+        return self.testPrivate()
+    }
+}
+#endif
+*/

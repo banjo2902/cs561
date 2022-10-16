@@ -1,7 +1,7 @@
 import XCTest
 @testable import MyLibrary
 
-class WeatherServiceTests: XCTestCase{   
+class WeatherServiceUnitTests: XCTestCase{
     func testIsWeatherDecodable() async {
         // Given
         let jsonString = """
@@ -15,8 +15,10 @@ class WeatherServiceTests: XCTestCase{
         
         let jsonData = Data(jsonString.utf8)
         let jsonDecoder = JSONDecoder()
+        
         // When
         let weather = try! jsonDecoder.decode(Weather.self, from: jsonData)
+        
         // Then
         print("res = ", weather.main.temp)
         XCTAssertNotNil(weather)

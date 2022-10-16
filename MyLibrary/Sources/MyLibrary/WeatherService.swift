@@ -1,13 +1,39 @@
 import Alamofire
+import Foundation
+
+var dic: String? = ProcessInfo.processInfo.environment["WEATHER_API_KEY"]
+var key = dic!
 
 public protocol WeatherService {
     func getTemperature() async throws -> Int
 }
 
 class WeatherServiceImpl: WeatherService {
-    let url = "https://api.openweathermap.org/data/2.5/weather?q=corvallis&units=imperial&appid=<INSERT YOUR API KEY HERE>"
+    private var serviceType: String
 
+    init(serviceType: String) {
+        self.serviceType = serviceType
+    }
+    
     func getTemperature() async throws -> Int {
+        var url: String = ""
+        // service type:
+        enum ServiceTypes: String {
+            case weatherAPI
+            case mockServer
+            
+            var code: String {
+                switch self {
+                case .weatherAPI: return "https://api.openweathermap.org/data/2.5/weather?q=corvallis&units=imperial&appid=\(key)"
+                case .mockServer: return "http://localhost:8000/data/2.5/weather"
+                }
+            }
+        }
+        
+        if let urlType = ServiceTypes(rawValue: serviceType) {
+            url = urlType.code
+        }
+        
         return try await withCheckedThrowingContinuation { continuation in
             AF.request(url, method: .get).validate(statusCode: 200..<300).responseDecodable(of: Weather.self) { response in
                 switch response.result {

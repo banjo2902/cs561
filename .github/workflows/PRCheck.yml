@@ -15,19 +15,21 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: checkout code
-    - uses: actions/checkout@v3
+      uses: actions/checkout@v3
+    
     - name: Set up Python 3.9
-    - uses: actions/setup-python@v2
+      uses: actions/setup-python@v2
       with:
         python-version: "3.9"
     - name: Update pip
-    - run: python -m pip install --upgrade pip
+      run: python -m pip install --upgrade pip
     - name: install fastapi
-    - run: pip install "fastapi[all]"
+      run: pip install "fastapi[all]"
     - name: enable mock server
-    - run: cd Fastapi
-    - run: uvicorn app.main:app --reload
-    - run: cd ..
+      run: |
+        cd Fastapi
+        uvicorn app.main:app --reload
+        cd ..
     
     - name: Build
       run: swift build -v

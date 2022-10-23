@@ -6,7 +6,7 @@ public class MyLibrary {
     /// Whenever we call the `MyLibrary()` constructor to instantiate a `MyLibrary` instance,
     /// the runtime then calls this initializer.  The constructor returns after the initializer returns.
     public init(weatherService: WeatherService? = nil) {
-        self.weatherService = weatherService ?? WeatherServiceImpl()
+        self.weatherService = weatherService ?? WeatherServiceImpl(serviceType: "mockServer")
     }
 
     public func isLucky(_ number: Int) async -> Bool? {

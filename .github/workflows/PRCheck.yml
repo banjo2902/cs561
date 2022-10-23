@@ -28,10 +28,6 @@ jobs:
         cd Fastapi
         pwd
         pip install "fastapi[all]"
-    - name: enable mock server
-      run: |
-        uvicorn app.main:app --reload
-        cd ..
     
     - name: Build
       run: swift build -v

@@ -26,6 +26,7 @@ jobs:
     - name: install fastapi
       run: |
         cd Fastapi
+        pwd
         pip install "fastapi[all]"
     - name: enable mock server
       run: |

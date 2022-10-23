@@ -25,7 +25,7 @@ jobs:
     - name: install fastapi
     - run: pip install "fastapi[all]"
     - name: enable mock server
-    - run: 
+    - run: |
         cd Fastapi
         uvicorn app.main:app --reload
         cd ..

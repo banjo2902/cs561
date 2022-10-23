@@ -31,11 +31,6 @@ jobs:
         
     - name: Run tests
       with:
-        command: |
-          cd Fastapi
-          pip install "fastapi[all]"
+        command: pip install "fastapi[all]"
         start: uvicorn app.main:app --reload
-        build: |
-          cd ..
-          pwd
-          swift test -v
+        build: swift test -v

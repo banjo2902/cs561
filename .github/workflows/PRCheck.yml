@@ -30,7 +30,10 @@ jobs:
         swift build -v
         
     - name: Run tests
+      uses: actions/checkout@v3
       with:
-        command: pip install "fastapi[all]"
+        command: |
+          cd Fastapi
+          pip install "fastapi[all]"
         start: uvicorn app.main:app --reload
         build: swift test -v

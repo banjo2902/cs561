@@ -24,7 +24,7 @@ jobs:
     - name: Update pip
       run: python -m pip install --upgrade pip
     
-    - name: Build
+    - name: Build Library
       working-directory: ./MyLibrary
       run: swift build -v
         
@@ -32,11 +32,11 @@ jobs:
       working-directory: ./Fastapi
       run: |
         pip install "fastapi[all]"
-        start: uvicorn app.main:app --reload
+        uvicorn app.main:app --reload
     - name: Check if my mock server is on
       working-directory: ./Fastapi
       run: curl "http://127.0.0.1:8000/data/2.5/weather"
       
-    - name: Test
+    - name: Library unit test and integration test
       working-directory: ./MyLibrary
       run: swift test -v

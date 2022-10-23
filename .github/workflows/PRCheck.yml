@@ -25,15 +25,18 @@ jobs:
       run: python -m pip install --upgrade pip
     
     - name: Build
-      run: |
-        cd MyLibrary
-        swift build -v
+      working-directory: ./MyLibrary
+      run: swift build -v
         
-    - name: Run tests
-      uses: actions/checkout@v3
-      with:
-        command: |
-          cd Fastapi
-          pip install "fastapi[all]"
+    - name: Run Mock Server
+      working-directory: ./Fastapi
+      run: |
+        pip install "fastapi[all]"
         start: uvicorn app.main:app --reload
-        build: swift test -v
+    - name: Check if my mock server is on
+      working-directory: ./Fastapi
+      run: curl "http://127.0.0.1:8000/data/2.5/weather"
+      
+    - name: Test
+      working-directory: ./MyLibrary
+      run: swift test -v

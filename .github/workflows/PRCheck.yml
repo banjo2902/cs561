@@ -13,6 +13,8 @@ jobs:
   build:
     name: PR check
     runs-on: macos-latest
+    env:
+      WEATHER_API_KEY: ${{secrets.WEATHER_API_KEY}}
     steps:
     - name: checkout code
       uses: actions/checkout@v3

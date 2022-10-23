@@ -32,7 +32,8 @@ jobs:
       working-directory: ./Fastapi
       run: |
         pip install "fastapi[all]"
-        uvicorn app.main:app --reload
+        uvicorn app.main:app &
+        
     - name: Check if my mock server is on
       working-directory: ./Fastapi
       run: curl "http://127.0.0.1:8000/data/2.5/weather"

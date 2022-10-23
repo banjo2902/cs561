@@ -24,10 +24,11 @@ jobs:
     - name: Update pip
       run: python -m pip install --upgrade pip
     - name: install fastapi
-      run: pip install "fastapi[all]"
-    - name: enable mock server
       run: |
         cd Fastapi
+        pip install "fastapi[all]"
+    - name: enable mock server
+      run: |
         uvicorn app.main:app --reload
         cd ..
     
